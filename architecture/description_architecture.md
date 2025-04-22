@@ -9,7 +9,7 @@ Le réseau est configuré en **classe C privée**, avec une plage d’adresses l
 ### 🧭 Composants principaux
 
 #### 1. Kali Linux avec Caldera
-- **Adresse IP** : `10.221.1.131`
+- **Adresse IP** : `10.221.1.130`
 - **Rôle** : Serveur de commande et de contrôle (C2) utilisant l’outil Caldera.
 - **Fonctions** :
   - Génération de scripts malveillants (`reverse.ps1`)
@@ -17,7 +17,7 @@ Le réseau est configuré en **classe C privée**, avec une plage d’adresses l
   - Serveur HTTP (port 8000) pour héberger les payloads.
 
 #### 2. Serveur Ubuntu avec Velociraptor
-- **Adresse IP** : `10.221.1.130`
+- **Adresse IP** : `10.221.1.131`
 - **Rôle** : Console de détection et de réponse (Blue Team).
 - **Fonctions** :
   - Collecte de données forensiques.
@@ -56,7 +56,7 @@ Le réseau est configuré en **classe C privée**, avec une plage d’adresses l
 ### 🧭 Composants principaux
 
 #### 1. Kali Linux avec Caldera
-- **Adresse IP** : `10.221.1.131`
+- **Adresse IP** : `10.221.1.130`
 - **Rôle** : Serveur de commande et de contrôle (C2) utilisant l’outil Caldera.
 - **Fonctions** :
   - Génération de scripts malveillants (`reverse.ps1`)
@@ -64,7 +64,7 @@ Le réseau est configuré en **classe C privée**, avec une plage d’adresses l
   - Serveur HTTP (port 8000) pour héberger les payloads.
 
 #### 2. Serveur Ubuntu avec Velociraptor
-- **Adresse IP** : `10.221.1.130`
+- **Adresse IP** : `10.221.1.131`
 - **Rôle** : Console de détection et de réponse (Blue Team).
 - **Fonctions** :
   - Collecte de données forensiques.
