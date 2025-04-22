@@ -14,7 +14,8 @@ cd /home/Velociraptor
 
 ## 2. Récupération et préparation du binaire
 
-Le binaire Linux de Velociraptor (version 0.73.4) a été téléchargé et rendu exécutable :
+Le binaire Linux de Velociraptor (version 0.73.4) a été téléchargé sur ce site : https://docs.velociraptor.app/downloads/
+et rendu exécutable :
 ```bash
 chmod +x /home/magatte/velociraptor-v0.73.4-linux-amd64
 mv /home/magatte/velociraptor-v0.73.4-linux-amd64 .
