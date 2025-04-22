@@ -15,7 +15,7 @@ Le projet consiste en une simulation offensive/défensive inspirée des TTPs du 
 - VMware Workstation / Réseau isolé
 
 ## 📂 Contenu du dépôt
-- `documentation/` : rapport
+- `architecture/` : rchitecture de test
 - `caldera/` : abilities personnalisées, profil adversaire et script malveillant
 - `velociraptor/` : artefacts, configs et regex
 - `installation/` : guides d’installation détaillés
