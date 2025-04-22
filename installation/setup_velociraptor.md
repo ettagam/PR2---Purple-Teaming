@@ -58,7 +58,6 @@ Le fichier `client.config.yaml` a ensuite été transféré sur la machine Windo
 Quelques vérifications ont été effectuées pour s'assurer que le service était bien actif :
 ```bash
 sudo systemctl status velociraptor_server
-sudo netstat -tulnp | grep 8000
 ```
 
 ---
