@@ -20,13 +20,6 @@ Le projet consiste en une simulation offensive/défensive inspirée des TTPs du 
 - `velociraptor/` : artefacts, configs et regex
 - `installation/` : guides d’installation détaillés
 
-## 👥 Membres de l’équipe
-- Magatte DIOP
-- Mouhamed Saliou DIALLO
-- Penda DIAKHATE
-- Ndeye Marie NDIAYE
-- El Hadji Mbaye NDIAYE
-
 ## 📅 Session
 Hiver 2025 – Université de Sherbrooke
 
